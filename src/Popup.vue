@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Ref } from "vue";
-import { MESSAGE_TYPES } from "~/constant";
+import { MESSAGE_TYPES } from "~/enums";
+import {Config} from "~/utils/types";
 
 const config = ref({}) as Ref<Config.Root>;
 
