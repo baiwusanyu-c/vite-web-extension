@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { createApp, h, watch } from 'vue'
-import { useStorage, CACHE_KEYS } from '~/hooks/use-storage'
+  import { watch } from 'vue'
+  import { useStorage } from '@/hooks/use-storage'
 
-const { cache, setItem } = useStorage()
-watch(cache, (val) => {
-  console.log(val)
-})
+  const { cache } = useStorage()
+  watch(cache, val => {
+    console.warn(val)
+  })
 </script>
 
 <template>

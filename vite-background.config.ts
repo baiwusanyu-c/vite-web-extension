@@ -7,7 +7,7 @@ export default defineConfig({
   publicDir: false,
   resolve: {
     alias: {
-      '~': r('src'),
+      '@': r('src'),
     },
   },
   build: {

@@ -1,55 +1,42 @@
-import { MESSAGE_TYPES } from '~/enums'
-import {useAlert} from "~/hooks/use-alert";
+import { MESSAGE_TYPES } from '@/enums'
 
 chrome.runtime.onStartup.addListener(() => {
-  iterate()
+  // injectScript()
 })
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log('background', request)
-    // content 载入时调用
-    if (request.type === MESSAGE_TYPES.CONTENT_LOADED) {
-      iterate()
-    }
+chrome.runtime.onMessage.addListener(request => {
+  // content 载入时调用
+  if (request.type === MESSAGE_TYPES.CONTENT_LOADED) {
+    // injectScript()
   }
-)
+})
 
-function iterate() {
-  chrome.tabs.query({}, (tabs) => {
-    tabs.forEach((tab) => {
-      if (tab.id) {
-        doInjectScript(tab.id, true,tab)
-      }
-    })
-  })
+/*async function getCurrentTab() {
+  let queryOptions = { active: true, currentWindow: true };
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
 }
-function doInjectScript(tabId: number, open: boolean,tab:any) {
-  // const {injectAlertDialog} = useAlert()
+
+async function injectScript(){
+  let tab = await getCurrentTab();
   chrome.scripting.executeScript({
-    target: { tabId },
-    args: [open,tab],// 传给 func 的参数
+    target: {tabId: Number(tab.id)},
     func:analysisUrl
-  })
+  });
 }
 
-/**
+/!**
  * 调取接口分析地址
- * @param open
- * @param tab
- */
-function analysisUrl(open:boolean,tab:any){
-  // window.alert('tab.url')
-  // setTimeout(()=>{
-  //   window.alert('setTimeout')
-  // },3000)
-   let elm = document.createElement('div')
-   elm.innerText = 'insert'
-   document.body.append(elm)
-
-  // 这个方法不能够放在外面，上下文会变
-  function injectAlertDialog () {
-    window.alert(tab.url)
-  }
-  injectAlertDialog()
-}
+ *!/
+function analysisUrl(){
+  window.alert(123)
+    // 向页面插入 分析脚本，实现获取网站url。并显示弹窗警告功能
+    // 这个脚本维护在 eagleeye 项目中
+   // let ga = document.createElement("script");
+   // ga.type = "text/javascript";
+   // ga.async = true;
+   // ga.id='czh'
+   // ga.src = r('../../dist/test/test');
+   // let s = document.getElementsByTagName("script")[0];
+   // s.parentNode?.insertBefore(ga, s);
+}*/

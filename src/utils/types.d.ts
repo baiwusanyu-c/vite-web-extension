@@ -1,9 +1,9 @@
 /*
-* @types.d.ts
-* @deprecated 
-* @author czh
-* @update (czh 2022/4/21)
-*/
+ * @types.d.ts
+ * @deprecated
+ * @author czh
+ * @update (czh 2022/4/21)
+ */
 declare namespace Config {
   type PropKeys = 'grayscale'
   interface ConfigItem {

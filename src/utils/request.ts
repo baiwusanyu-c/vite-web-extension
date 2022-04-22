@@ -20,7 +20,6 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   (config: any) => {
-
     if (config.method === 'post' && config.url !== '/auth/oauth/login') {
       config.data = config.params
       config.headers['Content-Type'] = 'application/json;charset=UTF-8'
@@ -45,10 +44,10 @@ service.interceptors.response.use(
     if (res.code !== 200 && res.code !== '0000' && res.code !== '0400' && res.code !== '9999') {
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-
+        console.warn(res.msg || res.message)
       }
       if (res.code === 401 || res.code === 920000003) {
-
+        console.warn(res.msg || res.message)
       }
       return Promise.reject(new Error(res.msg || res.message || 'Error'))
     } else {

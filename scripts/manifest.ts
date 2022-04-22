@@ -1,7 +1,7 @@
-import type { Manifest } from 'webextension-polyfill'
-import pkg from '../package.json'
 import fs from 'fs-extra'
+import pkg from '../package.json'
 import { r } from './util'
+import type { Manifest } from 'webextension-polyfill'
 
 function getManifest(): Manifest.WebExtensionManifest {
   // update this file to update this manifest.json
@@ -25,35 +25,22 @@ function getManifest(): Manifest.WebExtensionManifest {
     content_scripts: [
       {
         matches: ['http://*/*', 'https://*/*'],
-        js: [
-          './scripts/content/content.umd.js'
-        ],
+        js: ['./scripts/content/content.umd.js'],
       },
     ],
     commands: {
       _execute_action: {
         suggested_key: {
-          default: "Ctrl+Shift+F",
-          mac: "MacCtrl+Shift+F"
+          default: 'Ctrl+Shift+F',
+          mac: 'MacCtrl+Shift+F',
         },
-        description: "Opens hello.html"
-      }
+        description: 'Opens hello.html',
+      },
     },
-    host_permissions: [
-      "http://*/",
-      "https://*/",
-      "chrome://",
-      "edge://",
-    ],
-    permissions: [
-      'tabs',
-      'storage',
-      'activeTab',
-      'scripting',
-    ],
+    host_permissions: ['http://*/', 'https://*/', 'chrome://', 'edge://'],
+    permissions: ['tabs', 'storage', 'activeTab', 'scripting'],
   }
 }
-
 
 export async function writeManifest() {
   if (!fs.existsSync(r('./dist'))) {
@@ -63,4 +50,3 @@ export async function writeManifest() {
 }
 
 writeManifest()
-

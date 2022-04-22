@@ -10,15 +10,15 @@ export default defineConfig({
   base: 'ui',
   resolve: {
     alias: {
-      '~': r('src'),
+      '@': r('src'),
     },
   },
   plugins: [
     vue(),
     WindiCSS(),
     Components({
-      dts: true
-    })
+      dts: true,
+    }),
   ],
   build: {
     outDir: 'dist/ui',

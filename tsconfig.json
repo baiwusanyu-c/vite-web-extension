@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
+    // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
+    "noImplicitThis": false,
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -9,22 +11,21 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
     "types": [
       "vite/client",
       "node",
-      "chrome"
+      "chrome",
+      "@types/qs",
+      "jest",
+      "element-plus/global",
+      "/public/**/*.d.ts"
     ],
     "baseUrl": "./",
     "paths": {
-    "~/*": ["src/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "scripts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "scripts"]
 }
