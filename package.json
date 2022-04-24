@@ -7,7 +7,7 @@
     "dev": "run-p dev:*",
     "dev:web": "vue-tsc --noEmit && vite build --watch --mode=development",
     "dev:background": "vue-tsc --noEmit && vite build --watch --mode=development --config vite-background.config.ts",
-    "dev:content": "vue-tsc --noEmit --no-ignore && vite build --watch --mode=development --config vite-content.config.ts",
+    "dev:content": "vite build --watch --mode=development --config vite-content.config.ts",
     "dev:manifest": "esno ./scripts/manifest.ts",
     "build": "run-p dev:*",
     "lint:ts": "eslint ./src --ext .vue,.js,.ts,.jsx,.tsx",

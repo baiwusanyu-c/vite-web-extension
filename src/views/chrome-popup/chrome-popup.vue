@@ -21,6 +21,14 @@
     }
   })
 
+  const resVal = ref({})
+  const test = () => {
+    // chrome.runtime.sendMessage({ type: MESSAGE_TYPES.CONTENT_LOADED }, response => {
+    //     console.log('popup',response)
+    //     resVal.value = response
+    // })
+  }
+
   function updateConfig() {
     chrome.runtime.sendMessage({
       type: MESSAGE_TYPES.UPDATE_CONFIG,
@@ -33,8 +41,9 @@
 </script>
 
 <template>
-  <div class="container">
-    <button @click="reloadRuntime">重载</button>
+  <div class="container" @click="test()">
+    {{ resVal }}
+    <!--    <button @click="reloadRuntime">重载</button>
     <hr />
     <template v-if="Object.keys(config).length">
       <div v-for="(configItem, type) in config" :key="type" class="item">
@@ -50,7 +59,8 @@
     </template>
     <small>
       <i>Email-ubbcou@outlook.com</i>
-    </small>
+    </small>-->
+    123
   </div>
 </template>
 

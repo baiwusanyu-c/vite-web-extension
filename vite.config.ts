@@ -13,6 +13,8 @@ export default defineConfig({
       '@': r('src'),
     },
   },
+  // 指定环境变量文件路径
+  envDir: './env/',
   plugins: [
     vue(),
     vueJsx(),

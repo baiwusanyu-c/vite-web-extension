@@ -19,6 +19,8 @@ export default defineConfig({
       dts: true,
     }),
   ],
+  // 指定环境变量文件路径
+  envDir: './env/',
   build: {
     outDir: 'dist/scripts/content',
     sourcemap: true,

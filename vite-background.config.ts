@@ -10,6 +10,8 @@ export default defineConfig({
       '@': r('src'),
     },
   },
+  // 指定环境变量文件路径
+  envDir: './env/',
   build: {
     outDir: 'dist/scripts/background',
     sourcemap: true,
