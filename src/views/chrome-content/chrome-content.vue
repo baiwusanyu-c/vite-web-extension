@@ -1,7 +1,7 @@
 <script lang="tsx">
   import { defineComponent, nextTick, onMounted, ref } from 'vue'
-  // @ts-ignore
   import { debounce } from 'lodash-es'
+  // @ts-ignore
   import { BeMsg } from '../../../public/be-ui/be-ui.es.js'
   import { MESSAGE_TYPES } from '@/enums'
   import { getHost } from '@/utils/common'
@@ -9,7 +9,7 @@
   const msgBox = BeMsg.service
   export default defineComponent({
     setup() {
-      const openMsg = (type: string, title: string): void => {
+      const openMsg = (type: string, title: string, host: string): void => {
         msgBox({
           customClass: 'eagle-eye-dialog',
           titles: title,
@@ -17,7 +17,7 @@
           bodyRender: () => {
             return (
               <p style="font-size:14px;font-weight:400;font-family: Microsoft YaHei;letter-spacing: 2px;">
-                自然选择号！前进四！
+                自然选择号！前进四！{host}
               </p>
             )
           },
@@ -92,7 +92,7 @@
         })
         chrome.runtime.onMessage.addListener((res): void => {
           resVal.value = res
-          openMsg('success', isWeb3.value.toString())
+          openMsg('success', isWeb3.value.toString(), host)
         })
       }
       // 开始分析
