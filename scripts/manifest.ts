@@ -24,6 +24,7 @@ function getManifest(): Manifest.WebExtensionManifest {
     },
     content_scripts: [
       {
+        css: ['/scripts/content/style.css'],
         matches: ['http://*/*', 'https://*/*'],
         js: ['./scripts/content/content.umd.js'],
       },

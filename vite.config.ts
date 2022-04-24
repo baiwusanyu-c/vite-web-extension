@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
 import Components from 'unplugin-vue-components/vite'
-
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { r } from './scripts/util'
 
 // https://vitejs.dev/config/
@@ -15,6 +15,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    vueJsx(),
     WindiCSS(),
     Components({
       dts: true,

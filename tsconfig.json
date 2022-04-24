@@ -13,15 +13,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "vite/client",
-      "node",
-      "chrome",
-      "@types/qs",
-      "jest",
-      "element-plus/global",
-      "/public/**/*.d.ts"
-    ],
+    "types": ["vite/client", "node", "chrome", "@types/qs"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

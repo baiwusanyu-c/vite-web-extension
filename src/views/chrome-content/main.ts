@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import test from '@/views/chrome-content/chrome-content.vue'
-
+import content from '../chrome-content/chrome-content.vue'
+import '../../../public/be-ui/style.css'
 /**
  * 创建挂载节点并插入到注入页面下
  * @param id
@@ -11,5 +11,5 @@ function createMountElm(id: string): HTMLElement {
   document.body.append(mountElm)
   return mountElm
 }
-const app = createApp(test)
+const app = createApp(content)
 app.mount(createMountElm('beosin_eagle_eye_dialog'))
