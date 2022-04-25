@@ -82,31 +82,32 @@
         }
       }
       const resVal = ref({})
+      const isPhishing = ref<string>('')
       const { setItem, getItem } = useStorage()
       /**
        * 后台请求 是否为钓鱼网站
        */
       const analysisPhishingSite = (): void => {
         // 取缓存记录，如果以前判断过是钓鱼网站，就不调接口查询
-        let isPhishing = ''
         getItem(CACHE_KEYS.IS_PHISHING).then(res => {
-          isPhishing = res as string
-        })
-        if (isPhishing === 'true') {
-          setItem(CACHE_KEYS.IS_PHISHING, 'true')
-          return
-        }
-        const host = getHost()
-        chrome.runtime.sendMessage({
-          type: MESSAGE_TYPES.GET_ANALYSIS_RES,
-          data: { host, isWeb3: isWeb3.value },
-        })
-        chrome.runtime.onMessage.addListener((res): void => {
-          resVal.value = res
-          if (res && isPhishing !== 'true') {
-            setItem(CACHE_KEYS.IS_PHISHING, 'true')
+          isPhishing.value = res as string
+          if (isPhishing.value === 'true') {
+            openMsg('success', isWeb3.value.toString(), 'cache')
+            return
           }
-          openMsg('success', isWeb3.value.toString(), host)
+          const host = getHost()
+          chrome.runtime.sendMessage({
+            type: MESSAGE_TYPES.GET_ANALYSIS_RES,
+            data: { host, isWeb3: isWeb3.value },
+          })
+          chrome.runtime.onMessage.addListener((res): void => {
+            resVal.value = res
+            // if (res && isPhishing.value !== 'true') {
+            //   setItem(CACHE_KEYS.IS_PHISHING, 'true')
+            // }
+            setItem(CACHE_KEYS.IS_PHISHING, 'true')
+            openMsg('success', isWeb3.value.toString(), host)
+          })
         })
       }
       // 开始分析
