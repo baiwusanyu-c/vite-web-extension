@@ -6,7 +6,7 @@ type Cache = Ref<Record<string, unknown>>
 const cache = ref({}) as Cache
 
 export enum CACHE_KEYS {
-  CONFIGURE = 'CONFIG_RESULT',
+  IS_PHISHING = 'IS_PHISHING',
 }
 
 export function useStorage() {

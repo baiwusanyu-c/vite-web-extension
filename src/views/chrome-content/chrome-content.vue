@@ -1,10 +1,11 @@
 <script lang="tsx">
-  import { defineComponent, nextTick, onMounted, ref } from 'vue'
+  import { defineComponent, ref } from 'vue'
   import { debounce } from 'lodash-es'
   // @ts-ignore
   import { BeMsg } from '../../../public/be-ui/be-ui.es.js'
   import { MESSAGE_TYPES } from '@/enums'
   import { getHost } from '@/utils/common'
+  import { CACHE_KEYS, useStorage } from '@/hooks/use-storage'
 
   const msgBox = BeMsg.service
   export default defineComponent({
@@ -81,10 +82,20 @@
         }
       }
       const resVal = ref({})
+      const { setItem, getItem } = useStorage()
       /**
        * 后台请求 是否为钓鱼网站
        */
       const analysisPhishingSite = (): void => {
+        // 取缓存记录，如果以前判断过是钓鱼网站，就不调接口查询
+        let isPhishing = ''
+        getItem(CACHE_KEYS.IS_PHISHING).then(res => {
+          isPhishing = res as string
+        })
+        if (isPhishing === 'true') {
+          setItem(CACHE_KEYS.IS_PHISHING, 'true')
+          return
+        }
         const host = getHost()
         chrome.runtime.sendMessage({
           type: MESSAGE_TYPES.GET_ANALYSIS_RES,
@@ -92,6 +103,9 @@
         })
         chrome.runtime.onMessage.addListener((res): void => {
           resVal.value = res
+          if (res && isPhishing !== 'true') {
+            setItem(CACHE_KEYS.IS_PHISHING, 'true')
+          }
           openMsg('success', isWeb3.value.toString(), host)
         })
       }
